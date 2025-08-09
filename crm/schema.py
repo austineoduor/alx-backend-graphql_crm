@@ -158,8 +158,8 @@ class Mutation(graphene.ObjectType):
     bulk_create_customers = BulkCreateCustomers.Field()
     create_product = CreateProduct.Field()
     create_order = CreateOrder.Field()
-    
-#class Query(graphene.ObjectType):
+
+#class Query(CRMQuery, graphene.ObjectType):
 class Query(graphene.ObjectType):
     # query fields (or leave pass)
     all_customers = DjangoFilterConnectionField(CustomerNode, filterset_class=CustomerFilter)
