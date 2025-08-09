@@ -1,5 +1,7 @@
 import graphene
 
+#["class Query(CRMQuery, graphene.ObjectType)"]
+#["from crm.schema import"]
 class Query(graphene.ObjectType):
     hello = graphene.String()
 
