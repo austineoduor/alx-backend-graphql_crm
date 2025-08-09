@@ -7,7 +7,7 @@ from graphene import relay
 from graphene_django.filter import DjangoFilterConnectionField
 from .models import Customer, Product, Order
 from .filters import CustomerFilter, ProductFilter, OrderFilter
-# from crm.schema import
+#["from crm.schema import"]
 
 # Regex to validate phone formats like "+1234567890" or "123-456-7890"
 PHONE_REGEX = re.compile(r'^(\+\d{10,15}|\d{3}-\d{3}-\d{4})$')
@@ -159,7 +159,7 @@ class Mutation(graphene.ObjectType):
     create_product = CreateProduct.Field()
     create_order = CreateOrder.Field()
 
-#class Query(CRMQuery, graphene.ObjectType):
+#["class Query(CRMQuery, graphene.ObjectType)"]
 class Query(graphene.ObjectType):
     # query fields (or leave pass)
     all_customers = DjangoFilterConnectionField(CustomerNode, filterset_class=CustomerFilter)
