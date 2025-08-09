@@ -7,6 +7,7 @@ from graphene import relay
 from graphene_django.filter import DjangoFilterConnectionField
 from .models import Customer, Product, Order
 from .filters import CustomerFilter, ProductFilter, OrderFilter
+# from crm.schema import
 
 # Regex to validate phone formats like "+1234567890" or "123-456-7890"
 PHONE_REGEX = re.compile(r'^(\+\d{10,15}|\d{3}-\d{3}-\d{4})$')

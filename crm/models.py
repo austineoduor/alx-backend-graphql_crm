@@ -5,8 +5,8 @@ import uuid
 
 class Customer(models.Model):
     customer_id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True,editable=False)
-    name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100,unique=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
