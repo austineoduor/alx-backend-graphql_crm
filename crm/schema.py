@@ -35,10 +35,12 @@ class CustomerType(DjangoObjectType):
 class ProductType(DjangoObjectType):
     class Meta:
         model = Product
+        fields = ("product_id", "name", "stock")
 
 class OrderType(DjangoObjectType):
     class Meta:
         model = Order
+
 
 # 1. CreateCustomer mutation
 class CreateCustomer(graphene.Mutation):
@@ -152,12 +154,33 @@ class CreateOrder(graphene.Mutation):
         order.products.set(products)
         return CreateOrder(order=order)
 
+class UpdateLowStockProducts(graphene.Mutation):
+    class Arguments:
+        pass  # No arguments needed
+
+    updated_products = graphene.List(ProductType)
+    message = graphene.String()
+
+    def mutate(self, info):
+        low_stock_products = Product.objects.filter(stock__lt=10)
+        for product in low_stock_products:
+            product.stock += 10
+            product.save()
+
+        return UpdateLowStockProducts(
+            updated_products=low_stock_products,
+            message=f"Updated {low_stock_products.count()} low-stock products."
+        )
+
+
 # Mutation root to expose all mutation fields
 class Mutation(graphene.ObjectType):
+
     create_customer = CreateCustomer.Field()
     bulk_create_customers = BulkCreateCustomers.Field()
     create_product = CreateProduct.Field()
     create_order = CreateOrder.Field()
+    update_low_stock_products = UpdateLowStockProducts.Field()
 
 
 class Query(graphene.ObjectType):
