@@ -1,4 +1,6 @@
 from datetime import datetime
+from gql.transport.requests import RequestsHTTPTransport
+from gql import gql, Client
 import requests
 
 def log_crm_heartbeat():
